@@ -1,0 +1,23 @@
+@import 'variables.scss';
+
+.timer-container {
+    .value {
+        font-size: $fontsize-xxbig;
+        border-right: 1px solid white;
+
+        &.selected {
+            border-right: 1px solid black;
+        }
+    }
+    .unit {
+        margin-right: $unit-half;
+    }
+}
+
+input {
+    height: 0px;
+    position: absolute;
+    opacity: 0;
+    width: 0px;
+    z-index: -2;
+}
