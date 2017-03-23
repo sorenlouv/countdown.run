@@ -13,30 +13,40 @@ class AddTimer extends Component {
 
     this.state = {
       inputTime: '',
-      cursorIndex: 0
+      caretIndex: 0
     };
   }
 
   onKeyDown(event) {
-    switch (event.key) {
+    const target = event.target;
+
+    switch(event.key) {
       case 'ArrowLeft':
-        if (this.state.cursorIndex < this.state.inputTime.length) {
-          const nextPosition = this.state.cursorIndex + 1;
-          this.setState({ cursorIndex: nextPosition });
-        }
-        break;
       case 'ArrowRight':
-        if (this.state.cursorIndex > 0) {
-          const nextPosition = this.state.cursorIndex - 1;
-          this.setState({ cursorIndex: nextPosition });
-        }
+        setTimeout(() => {
+          const caretIndex = this.state.inputTime.length - target.selectionStart;
+          this.setState({ caretIndex });
+        }, 0);
+        break;
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '0':
+      case 'Backspace':
+        console.log('do nothin');
         break;
       default:
-        return;
+        console.log(event.key);
+        event.preventDefault();
     }
   }
 
-  // TODO: max length: 6
   onInputChange(event) {
     const inputTime = event.target.value;
     const isNegative = parseInt(inputTime, 10) < 0;
@@ -67,14 +77,14 @@ class AddTimer extends Component {
   render() {
     const [hour1, hour2, min1, min2, sec1, sec2] = this.getFormattedTime(this.state.inputTime);
     const getSelectedClass = (index) => {
-      const isSelected = index === this.state.cursorIndex;
+      const isSelected = index === this.state.caretIndex;
       return isSelected ? 'selected' : 'a';
     };
 
     return (
       <form onSubmit={this.onSubmitForm}>
         <input
-          type="number"
+          type="text"
           ref={(input) => { this.input = input; }}
           value={this.state.inputTime}
           onKeyDown={this.onKeyDown}
@@ -82,6 +92,7 @@ class AddTimer extends Component {
           onBlur={this.onBlur}
         />
         <p className="timer-container" onClick={this.onTimeboxClick}>
+          <span className={'value ' + getSelectedClass(6)}></span>
           <span className={'value ' + getSelectedClass(5)}>{hour1}</span>
           <span className={'value ' + getSelectedClass(4)}>{hour2}</span>
           <span className="unit">h</span>
