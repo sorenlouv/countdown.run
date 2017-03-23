@@ -1,14 +1,16 @@
-@import 'variables.scss';
+@import '../variables.scss';
 
-.timer-container {
+.editor-container {
+    user-select: none;
+    cursor: pointer;
+    &.has-focus .value.selected {
+        border-right: 1px solid black;
+    }
+
     .value {
         font-size: $fontsize-xxbig;
         border-right: 1px solid white;
         color: #ccc;
-
-        &.selected {
-            border-right: 1px solid black;
-        }
 
         &.active {
             color: #000;

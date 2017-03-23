@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import AddTimer from './components/AddTimer';
-import ListTimers from './components/ListTimers';
+import AddCountdown from './components/AddCountdown';
+import CountdownList from './components/CountdownList';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <AddTimer />
-        <ListTimers/>
+        <AddCountdown />
+        <CountdownList/>
       </div>
     );
   }

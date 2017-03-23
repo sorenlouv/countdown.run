@@ -1,0 +1,11 @@
+@import '../variables.scss';
+
+.countdown-container {
+    user-select: none;
+    .value {
+        font-size: $fontsize-xxbig;
+    }
+    .unit {
+        margin-right: $unit-half;
+    }
+}

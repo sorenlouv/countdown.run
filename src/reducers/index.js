@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux'
-import timers from './timers'
+import countdowns from './countdowns'
 import editor from './editor'
 
 const combinedReducers = combineReducers({
-  timers,
+  countdowns,
   editor
 })
 
