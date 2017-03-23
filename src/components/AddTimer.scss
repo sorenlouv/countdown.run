@@ -4,9 +4,14 @@
     .value {
         font-size: $fontsize-xxbig;
         border-right: 1px solid white;
+        color: #ccc;
 
         &.selected {
             border-right: 1px solid black;
+        }
+
+        &.active {
+            color: #000;
         }
     }
     .unit {

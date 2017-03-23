@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { padStart } from 'lodash';
+import classNames from 'classnames';
 import './AddTimer.css';
 
 class AddTimer extends Component {
@@ -11,10 +12,64 @@ class AddTimer extends Component {
     this.onSubmitForm = this.onSubmitForm.bind(this);
     this.onBlur = this.onBlur.bind(this);
 
+    this.handleArrowUp = this.handleArrowUp.bind(this);
+
     this.state = {
       inputTime: '',
       caretIndex: 0
     };
+  }
+
+  getCaretUnit() {
+
+  }
+
+  incrementHour() {
+
+  }
+
+  incrementMinute() {
+
+  }
+
+  incrementSecond() {
+
+  }
+
+  decrementHour() {
+
+  }
+
+  decrementMinute() {
+
+  }
+
+  decrementSecond() {
+
+  }
+
+  handleArrowUp() {
+    const caretUnit = this.getCaretUnit();
+    switch(caretUnit) {
+      case 'hour':
+        return this.incrementHour();
+      case 'minute':
+        return this.incrementMinute();
+      case 'second':
+        return this.incrementSecond();
+    }
+  }
+
+  handleArrowDown() {
+    const caretUnit = this.getCaretUnit();
+    switch(caretUnit) {
+      case 'hour':
+        return this.decrementHour();
+      case 'minute':
+        return this.decrementMinute();
+      case 'second':
+        return this.decrementSecond();
+    }
   }
 
   onKeyDown(event) {
@@ -27,6 +82,14 @@ class AddTimer extends Component {
           const caretIndex = this.state.inputTime.length - target.selectionStart;
           this.setState({ caretIndex });
         }, 0);
+        break;
+      case 'ArrowUp':
+        this.handleArrowUp();
+        event.preventDefault();
+        break;
+      case 'ArrowDown':
+        this.handleArrowDown();
+        event.preventDefault();
         break;
       case '1':
       case '2':
@@ -76,9 +139,11 @@ class AddTimer extends Component {
 
   render() {
     const [hour1, hour2, min1, min2, sec1, sec2] = this.getFormattedTime(this.state.inputTime);
-    const getSelectedClass = (index) => {
-      const isSelected = index === this.state.caretIndex;
-      return isSelected ? 'selected' : 'a';
+    const getTimerValueClass = (index) => {
+      return classNames({
+        selected: index === this.state.caretIndex,
+        active: index < this.state.inputTime.length
+      });
     };
 
     return (
@@ -92,17 +157,17 @@ class AddTimer extends Component {
           onBlur={this.onBlur}
         />
         <p className="timer-container" onClick={this.onTimeboxClick}>
-          <span className={'value ' + getSelectedClass(6)}></span>
-          <span className={'value ' + getSelectedClass(5)}>{hour1}</span>
-          <span className={'value ' + getSelectedClass(4)}>{hour2}</span>
+          <span className={'value ' + getTimerValueClass(6)}></span>
+          <span className={'value ' + getTimerValueClass(5)}>{hour1}</span>
+          <span className={'value ' + getTimerValueClass(4)}>{hour2}</span>
           <span className="unit">h</span>
 
-          <span className={'value ' + getSelectedClass(3)}>{min1}</span>
-          <span className={'value ' + getSelectedClass(2)}>{min2}</span>
+          <span className={'value ' + getTimerValueClass(3)}>{min1}</span>
+          <span className={'value ' + getTimerValueClass(2)}>{min2}</span>
           <span className="unit">m</span>
 
-          <span className={'value ' + getSelectedClass(1)}>{sec1}</span>
-          <span className={'value ' + getSelectedClass(0)}>{sec2}</span>
+          <span className={'value ' + getTimerValueClass(1)}>{sec1}</span>
+          <span className={'value ' + getTimerValueClass(0)}>{sec2}</span>
           <span className="unit">s</span>
         </p>
         <button type="submit">Add timer</button>
