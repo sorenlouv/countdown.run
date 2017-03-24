@@ -87,17 +87,17 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         onChange={(event) => onInputChange(event.target.value)}
       />
       <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => inputElm.focus()}>
-        <span className={'value ' + getValueClass(6)}></span>
-        <span className={'value ' + getValueClass(5)}>{hour1}</span>
-        <span className={'value ' + getValueClass(4)}>{hour2}</span>
+        <span className={`value ${getValueClass(6)}`}></span>
+        <span className={`value ${getValueClass(5)}`}>{hour1}</span>
+        <span className={`value ${getValueClass(4)}`}>{hour2}</span>
         <span className="unit">h</span>
 
-        <span className={'value ' + getValueClass(3)}>{min1}</span>
-        <span className={'value ' + getValueClass(2)}>{min2}</span>
+        <span className={`value ${getValueClass(3)}`}>{min1}</span>
+        <span className={`value ${getValueClass(2)}`}>{min2}</span>
         <span className="unit">m</span>
 
-        <span className={'value ' + getValueClass(1)}>{sec1}</span>
-        <span className={'value ' + getValueClass(0)}>{sec2}</span>
+        <span className={`value ${getValueClass(1)}`}>{sec1}</span>
+        <span className={`value ${getValueClass(0)}`}>{sec2}</span>
         <span className="unit">s</span>
       </div>
     </form>

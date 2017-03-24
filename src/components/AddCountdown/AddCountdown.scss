@@ -12,16 +12,16 @@
         }
 
         .value {
-            font-size: $fontsize-xxbig;
+            font-size: $fontsize-xxxbig;
             border-right: 1px solid white;
             color: #ccc;
-
             &.active {
                 color: #000;
             }
         }
         .unit {
             margin-right: $unit-half;
+            font-size: 22px;
         }
     }
 
