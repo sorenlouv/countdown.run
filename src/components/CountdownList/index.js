@@ -1,7 +1,15 @@
 import { connect } from 'react-redux'
 
 // Actions
-import { removeCountdown, pauseCountdown, resumeCountdown, resetCountdown, toggleDidNotify } from '../../actions/countdown'
+import {
+  removeCountdown,
+  pauseCountdown,
+  resumeCountdown,
+  restartCountdown,
+  resetCountdown,
+  toggleDidNotify,
+  dismissCountdown
+} from '../../actions/countdown'
 import CountdownList from './CountdownList'
 
 const mapStateToProps = (state) => {
@@ -21,8 +29,14 @@ const mapDispatchToProps = (dispatch) => {
     onClickResume(id) {
       dispatch(resumeCountdown(id));
     },
+    onClickStart(id) {
+      dispatch(restartCountdown(id));
+    },
     onClickReset(id) {
       dispatch(resetCountdown(id));
+    },
+    onClickDismiss(id) {
+      dispatch(dismissCountdown(id));
     },
     onNotify(id) {
       dispatch(toggleDidNotify(id))

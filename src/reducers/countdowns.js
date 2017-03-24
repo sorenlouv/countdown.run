@@ -1,61 +1,38 @@
-const DEFAULT_COUNTDOWN = {
-  pausedDuruation: 0,
-  pausedAt: null,
-  didNotify: false
-};
+import {omit} from 'lodash';
+
+function updatedStated(state, action) {
+  return {
+    ...state,
+    ...omit(action, 'type')
+  };
+}
 
 const countdown = (state = {}, action) => {
   switch (action.type) {
 
     case 'ADD_COUNTDOWN':
-      return {
-        id: action.id,
-        time: action.time,
-        startedAt: Date.now(),
-        ...DEFAULT_COUNTDOWN
-      }
+      return updatedStated(state, action)
 
     case 'PAUSE_COUNTDOWN':
-      if(action.id !== state.id) {
-        return state;
-      }
-
-      return {
-        ...state,
-        pausedAt: Date.now()
-      };
+      return updatedStated(state, action)
 
     case 'RESUME_COUNTDOWN':
-      if(action.id !== state.id) {
-        return state;
-      }
-
       return {
-        ...state,
-        pausedAt: null,
+        ...updatedStated(state, action),
         pausedDuruation: state.pausedDuruation + (Date.now() - state.pausedAt)
       }
 
     case 'RESET_COUNTDOWN':
-      if(action.id !== state.id) {
-        return state;
-      }
+      return updatedStated(state, action)
 
-      return {
-        ...state,
-        startedAt: Date.now(),
-        ...DEFAULT_COUNTDOWN
-      }
+    case 'RESTART_COUNTDOWN':
+      return updatedStated(state, action)
+
+    case 'DISMISS_COUNTDOWN':
+      return updatedStated(state, action)
 
     case 'TOGGLE_DID_NOTIFY':
-      if(action.id !== state.id) {
-        return state;
-      }
-
-      return {
-        ...state,
-        didNotify: true
-      };
+      return updatedStated(state, action)
 
     default:
       return state
@@ -68,11 +45,18 @@ const countdowns = (state = [], action) => {
     case 'ADD_COUNTDOWN':
       return [...state, countdown({}, action)]
 
+    case 'DISMISS_COUNTDOWN':
+    case 'RESTART_COUNTDOWN':
     case 'PAUSE_COUNTDOWN':
     case 'RESUME_COUNTDOWN':
     case 'RESET_COUNTDOWN':
     case 'TOGGLE_DID_NOTIFY':
-      return state.map((item) => countdown(item, action));
+      return state.map((item) => {
+        if(action.id !== item.id) {
+          return item;
+        }
+        return countdown(item, action)
+      });
 
     case 'REMOVE_COUNTDOWN':
       return state.filter(countdown => countdown.id !== action.id);

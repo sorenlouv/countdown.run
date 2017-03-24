@@ -1,7 +1,7 @@
 import React from 'react';
 import Countdown from './Countdown';
 
-const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, onClickReset, onNotify}) => {
+const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, onClickStart, onClickReset, onClickDismiss, onNotify}) => {
   return (
     <div>
       <h2>Timers</h2>
@@ -13,7 +13,9 @@ const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, 
           onClickRemove={() => onClickRemove(countdown.id)}
           onClickPause={() => onClickPause(countdown.id)}
           onClickResume={() => onClickResume(countdown.id)}
+          onClickStart={() => onClickStart(countdown.id)}
           onClickReset={() => onClickReset(countdown.id)}
+          onClickDismiss={() => onClickDismiss(countdown.id)}
         />
       )}
     </div>

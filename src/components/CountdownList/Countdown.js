@@ -9,9 +9,13 @@ const Button = ({onClick, icon, text}) => (
   </a>
 )
 
-const StartStopButton = ({pausedAt, onClickPause, onClickResume, onClickReset, pauseSound, timeRemaining}) => {
+const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onClickReset, onClickStart, onClickDismiss, timeRemaining}) => {
   if (timeRemaining === 0) {
-    return <Button text="OK" icon="done" onClick={pauseSound}/>;
+    return <Button text="OK" icon="done" onClick={onClickDismiss}/>;
+  }
+
+  if(!startedAt) {
+    return <Button text="Start" icon="play_arrow" onClick={onClickStart}/>;
   }
 
   return pausedAt ?
@@ -29,6 +33,8 @@ export default class Countdown extends Component {
       if (timeRemaining === 0 && !this.props.didNotify) {
         this.props.onNotify();
         this.sound.play();
+      } else if(this.props.isDismissed) {
+        this.sound.pause();
       }
 
       this.forceUpdate();
@@ -56,9 +62,9 @@ export default class Countdown extends Component {
           <span className="unit">s</span>
         </p>
 
-        <StartStopButton {...this.props} pauseSound={() => this.sound.pause()} timeRemaining={timeRemaining}/>
+        <StartStopButton {...this.props} onClickDismiss={this.props.onClickDismiss} timeRemaining={timeRemaining}/>
           <Button icon="replay" text="reset" onClick={() => {
-            this.sound.pause();
+            {/*this.sound.pause();*/}
             return this.props.onClickReset();
           }}/>
       </div>
@@ -75,9 +81,15 @@ function msToTimeObject(duration) {
 
 function getTimeRemaining(props) {
     const [hour1, hour2, min1, min2, sec1, sec2] = padStart(props.time, 6, '0').split('');
-    const seconds = parseInt(hour1 + hour2, 10) * 3600 + parseInt(min1 + min2, 10) * 60 + parseInt(sec1 + sec2, 10);
-    const ms = seconds * 1000;
-    const deadlineAt = props.startedAt + ms;
+    const countdownDuration = (parseInt(hour1 + hour2, 10) * 3600 + parseInt(min1 + min2, 10) * 60 + parseInt(sec1 + sec2, 10)) * 1000;
+    const isStarted = !!props.startedAt;
+
+    // if the timer was not started, the remaining time is the countdown duration
+    if(!isStarted) {
+      return countdownDuration;
+    }
+
+    const deadlineAt = props.startedAt + countdownDuration;
     const timeRemaining = deadlineAt - (props.pausedAt || Date.now()) + props.pausedDuruation;
     if (timeRemaining < 0) {
       return 0;
