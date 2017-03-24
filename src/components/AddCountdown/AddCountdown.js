@@ -70,6 +70,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         onKeyDown={onKeyDown}
         onChange={(event) => onInputChange(event.target.value)}
       />
+      <button type="submit">Save</button>
       <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => inputElm.focus()}>
         <span className={'value ' + getValueClass(6)}></span>
         <span className={'value ' + getValueClass(5)}>{hour1}</span>
