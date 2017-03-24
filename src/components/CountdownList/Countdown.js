@@ -10,7 +10,7 @@ const Button = ({onClick, icon, text, style, className = ''}) => (
   </a>
 )
 
-const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onClickReset, onClickStart, onClickDismiss, timeRemaining}) => {
+const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onClickStart, onClickDismiss, timeRemaining}) => {
   if (timeRemaining === 0) {
     return <Button className="green" text="OK" icon="done" onClick={onClickDismiss}/>;
   }
