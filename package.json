@@ -1,6 +1,7 @@
 {
   "name": "eggtimer",
   "version": "0.1.0",
+  "homepage": "http://countdown.run",
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
@@ -11,11 +12,14 @@
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "gh-pages": "^0.12.0",
     "node-sass": "^4.5.1",
     "npm-run-all": "^4.0.2",
     "react-scripts": "0.9.5"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",

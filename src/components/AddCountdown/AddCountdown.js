@@ -43,7 +43,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
   }
 
   return (
-    <form onSubmit={(event) => {
+    <form className="add-countdown" onSubmit={(event) => {
         event.preventDefault();
         addCountdown(editor.time);
         resetEditor();
@@ -59,7 +59,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         onKeyDown={onKeyDown}
         onChange={(event) => onInputChange(event.target.value)}
       />
-      <p className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => inputElm.focus()}>
+      <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => inputElm.focus()}>
         <span className={'value ' + getValueClass(6)}></span>
         <span className={'value ' + getValueClass(5)}>{hour1}</span>
         <span className={'value ' + getValueClass(4)}>{hour2}</span>
@@ -72,7 +72,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         <span className={'value ' + getValueClass(1)}>{sec1}</span>
         <span className={'value ' + getValueClass(0)}>{sec2}</span>
         <span className="unit">s</span>
-      </p>
+      </div>
     </form>
   );
 }
