@@ -7,8 +7,8 @@ import {
   resumeCountdown,
   restartCountdown,
   resetCountdown,
-  toggleDidNotify,
-  dismissCountdown
+  dismissCountdown,
+  setIsRinging
 } from '../../actions/countdown'
 import CountdownList from './CountdownList'
 
@@ -38,8 +38,8 @@ const mapDispatchToProps = (dispatch) => {
     onClickDismiss(id) {
       dispatch(dismissCountdown(id));
     },
-    onNotify(id) {
-      dispatch(toggleDidNotify(id))
+    onStartRinging(id) {
+      dispatch(setIsRinging(id));
     }
   }
 }

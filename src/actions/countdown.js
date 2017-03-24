@@ -3,9 +3,9 @@ const crypto = require('crypto');
 const DEFAULT_COUNTDOWN = {
   pausedDuruation: 0,
   pausedAt: null,
-  didNotify: false,
   startedAt: null,
-  isDismissed: false
+  isDismissed: false,
+  isRinging: false
 };
 
 export const addCountdown = (time) => {
@@ -25,14 +25,6 @@ export const removeCountdown = (id) => {
   }
 }
 
-export const pauseCountdown = (id) => {
-  return {
-    type: 'PAUSE_COUNTDOWN',
-    id,
-    pausedAt: Date.now()
-  }
-}
-
 export const resumeCountdown = (id) => {
   return {
     type: 'RESUME_COUNTDOWN',
@@ -41,10 +33,18 @@ export const resumeCountdown = (id) => {
   }
 }
 
+export const pauseCountdown = (id) => {
+  return {
+    type: 'UPDATE_COUNTDOWN',
+    id,
+    pausedAt: Date.now()
+  }
+}
+
 // Reset without restart
 export const resetCountdown = (id) => {
   return {
-    type: 'RESET_COUNTDOWN',
+    type: 'UPDATE_COUNTDOWN',
     id,
     ...DEFAULT_COUNTDOWN
   }
@@ -53,28 +53,27 @@ export const resetCountdown = (id) => {
 // reset and restart
 export const restartCountdown = (id) => {
   return {
-    type: 'RESTART_COUNTDOWN',
+    type: 'UPDATE_COUNTDOWN',
     id,
     ...DEFAULT_COUNTDOWN,
     startedAt: Date.now()
   }
 }
 
-
 export const dismissCountdown = (id) => {
   return {
-    type: 'DISMISS_COUNTDOWN',
+    type: 'UPDATE_COUNTDOWN',
     id,
     ...DEFAULT_COUNTDOWN,
     isDismissed: true
   }
 }
 
-export const toggleDidNotify = (id) => {
+export const setIsRinging = (id) => {
   return {
-    type: 'TOGGLE_DID_NOTIFY',
+    type: 'UPDATE_COUNTDOWN',
     id,
-    didNotify: true
+    isRinging: true
   }
 }
 

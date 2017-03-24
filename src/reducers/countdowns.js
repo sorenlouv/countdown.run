@@ -11,9 +11,7 @@ const countdown = (state = {}, action) => {
   switch (action.type) {
 
     case 'ADD_COUNTDOWN':
-      return updatedStated(state, action)
-
-    case 'PAUSE_COUNTDOWN':
+    case 'UPDATE_COUNTDOWN':
       return updatedStated(state, action)
 
     case 'RESUME_COUNTDOWN':
@@ -21,18 +19,6 @@ const countdown = (state = {}, action) => {
         ...updatedStated(state, action),
         pausedDuruation: state.pausedDuruation + (Date.now() - state.pausedAt)
       }
-
-    case 'RESET_COUNTDOWN':
-      return updatedStated(state, action)
-
-    case 'RESTART_COUNTDOWN':
-      return updatedStated(state, action)
-
-    case 'DISMISS_COUNTDOWN':
-      return updatedStated(state, action)
-
-    case 'TOGGLE_DID_NOTIFY':
-      return updatedStated(state, action)
 
     default:
       return state
@@ -45,12 +31,7 @@ const countdowns = (state = [], action) => {
     case 'ADD_COUNTDOWN':
       return [...state, countdown({}, action)]
 
-    case 'DISMISS_COUNTDOWN':
-    case 'RESTART_COUNTDOWN':
-    case 'PAUSE_COUNTDOWN':
-    case 'RESUME_COUNTDOWN':
-    case 'RESET_COUNTDOWN':
-    case 'TOGGLE_DID_NOTIFY':
+    case 'UPDATE_COUNTDOWN':
       return state.map((item) => {
         if(action.id !== item.id) {
           return item;

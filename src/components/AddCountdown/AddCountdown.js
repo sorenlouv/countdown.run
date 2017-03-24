@@ -3,12 +3,6 @@ import { padStart } from 'lodash';
 import classNames from 'classnames';
 import './AddCountdown.css';
 
-// Hack: Chrome will only allows sounds to be played as part of a user action.
-// This will create a global Audio element, which will be started on the users first interaction with a volume of 0
-window.alarmSound = new Audio("https://soundbible.com/grab.php?id=1599&type=wav");
-window.alarmSound.loop = true;
-window.alarmSound.volume = 0;
-
 const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputChange, onFocusChange, resetEditor}) => {
   let inputElm;
   const [hour1, hour2, min1, min2, sec1, sec2] = padStart(editor.time, 6, '0').split('');
@@ -21,11 +15,14 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
 
   const submitForm = (event) => {
     event.preventDefault();
-    if (!!editor.time) {
+    if (parseInt(editor.time, 10) > 0) {
       addCountdown(editor.time);
       resetEditor();
     }
-    window.alarmSound.play();
+
+    if (window.alarmSound.paused) {
+      window.alarmSound.play();
+    }
   }
 
   const onKeyDown = (event) => {
