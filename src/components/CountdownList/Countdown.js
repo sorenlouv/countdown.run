@@ -26,16 +26,13 @@ const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onCl
 
 export default class Countdown extends Component {
   componentDidMount() {
-    this.sound = new Audio("https://soundbible.com/grab.php?id=1599&type=wav");
-    this.sound.loop = true;
-
     this.intervalId = setInterval(() => {
       const timeRemaining = getTimeRemaining(this.props);
       if (timeRemaining === 0 && !this.props.didNotify) {
         this.props.onNotify();
-        this.sound.play();
-      } else if (timeRemaining > 0) {
-        this.sound.pause();
+        window.alarmSound.volume = 1;
+      } else if (timeRemaining > 0 && window.alarmSound.volume > 0) {
+        window.alarmSound.volume = 0;
       }
 
       this.forceUpdate();
@@ -44,7 +41,7 @@ export default class Countdown extends Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalId);
-    this.sound.pause();
+    window.alarmSound.pause();
   }
 
   render() {
