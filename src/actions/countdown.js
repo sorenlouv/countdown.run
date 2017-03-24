@@ -1,9 +1,9 @@
-let nextCountdownId = 0
+const crypto = require('crypto');
 
 export const addCountdown = (time) => {
   return {
     type: 'ADD_COUNTDOWN',
-    id: nextCountdownId++,
+    id: getUniqueId(),
     time,
   }
 }
@@ -43,4 +43,6 @@ export const toggleDidNotify = (id) => {
   }
 }
 
-
+function getUniqueId() {
+	return crypto.randomBytes(32).toString('hex');
+}

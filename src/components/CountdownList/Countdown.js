@@ -2,26 +2,33 @@ import React, {Component} from 'react';
 import { padStart } from 'lodash';
 import './Countdown.css';
 
-const notifySound = new Audio("http://soundbible.com/grab.php?id=1599&type=wav");
-const playSound = () => notifySound.play();
+const Button = ({onClick, icon, text}) => (
+  <a className="waves-effect waves-light btn" onClick={onClick}>
+    <i className="material-icons left">{icon}</i>
+    {text}
+  </a>
+)
 
-const ControlButton = ({pausedAt, onClickPause, onClickResume, onClickReset, timeRemaining}) => {
+const StartStopButton = ({pausedAt, onClickPause, onClickResume, onClickReset, pauseSound, timeRemaining}) => {
   if (timeRemaining === 0) {
-    return <button onClick={onClickReset}>Reset</button>;
+    return <Button text="OK" icon="done" onClick={pauseSound}/>;
   }
 
   return pausedAt ?
-    <button onClick={onClickResume}>Resume</button> :
-    <button onClick={onClickPause}>Pause</button>;
+    <Button text="Resume" icon="play_arrow" onClick={onClickResume}/> :
+    <Button text="Pause" icon="pause" onClick={onClickPause}/>;
 };
 
 export default class Countdown extends Component {
   componentDidMount() {
+    this.sound = new Audio("https://soundbible.com/grab.php?id=1599&type=wav");
+    this.sound.loop = true;
+
     this.intervalId = setInterval(() => {
       const timeRemaining = getTimeRemaining(this.props);
       if (timeRemaining === 0 && !this.props.didNotify) {
         this.props.onNotify();
-        playSound();
+        this.sound.play();
       }
 
       this.forceUpdate();
@@ -30,6 +37,7 @@ export default class Countdown extends Component {
 
   componentWillUnmount() {
     clearInterval(this.intervalId);
+    this.sound.pause();
   }
 
   render() {
@@ -37,6 +45,7 @@ export default class Countdown extends Component {
     const {hours, minutes, seconds} = msToTimeObject(timeRemaining);
     return <div className="countdown-container">
         <p>
+          <i className="material-icons" onClick={this.props.onClickRemove}>delete</i>
           <span className="value">{hours}</span>
           <span className="unit">h</span>
 
@@ -47,8 +56,11 @@ export default class Countdown extends Component {
           <span className="unit">s</span>
         </p>
 
-        <ControlButton {...this.props} timeRemaining={timeRemaining}/>
-        <button onClick={this.props.onClickRemove}>Remove</button>
+        <StartStopButton {...this.props} pauseSound={() => this.sound.pause()} timeRemaining={timeRemaining}/>
+          <Button icon="replay" text="reset" onClick={() => {
+            this.sound.pause();
+            return this.props.onClickReset();
+          }}/>
       </div>
   }
 };
