@@ -27,6 +27,11 @@
         position: absolute;
         left: $unit-half;
         top: 14px;
+        color: #aaa;
+
+        &:hover {
+            color: #000;
+        }
     }
 }
 
