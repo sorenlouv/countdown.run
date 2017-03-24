@@ -13,6 +13,14 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
     });
   };
 
+  const submitForm = (event) => {
+    event.preventDefault();
+    if (!!editor.time) {
+      addCountdown(editor.time);
+      resetEditor();
+    }
+  }
+
   const onKeyDown = (event) => {
     const hasModifierKey = event.ctrlKey || event.shiftKey || event.altKey || event.metaKey;
     if (hasModifierKey) {
@@ -36,6 +44,11 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         }
         break;
 
+      // Hack: A "Tab" key event is send when submitting a numerical input on Android
+      case 'Tab':
+        submitForm(event);
+        break;
+
       case 'NUMBER':
         if (editor.time.length === 6) {
           event.preventDefault();
@@ -54,11 +67,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
   }
 
   return (
-    <form className="add-countdown" onSubmit={(event) => {
-        event.preventDefault();
-        addCountdown(editor.time);
-        resetEditor();
-      }}>
+    <form className="add-countdown" onSubmit={submitForm}>
       <input
         tabIndex="0"
         autoFocus
@@ -91,11 +100,12 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
 
 function getKeyType (key) {
   switch(key) {
-    // Allowed arrows
+    // Allowed keys
     case 'ArrowLeft':
     case 'ArrowRight':
     case 'ArrowUp':
     case 'ArrowDown':
+    case 'Tab':
       return key
 
     // Allowed numbers
