@@ -14,15 +14,26 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
   };
 
   const onKeyDown = (event) => {
+    const hasModifierKey = event.ctrlKey || event.shiftKey || event.altKey || event.metaKey;
+    if (hasModifierKey) {
+      event.preventDefault();
+      return;
+    }
+
     const { target, key } = event;
     const type = getKeyType(key);
+
     switch(type) {
-      case 'HORISONTAL_ARROW':
-        console.log('Allowed arrow', event.key);
-        setTimeout(() => {
-          const caretIndex = editor.time.length - target.selectionStart;
-          onCaretChange(caretIndex);
-        }, 0);
+      case 'ArrowLeft':
+        if (editor.caretIndex < editor.time.length) {
+          onCaretChange((editor.caretIndex + 1));
+        }
+        break;
+
+      case 'ArrowRight':
+        if (editor.caretIndex > 0) {
+          onCaretChange((editor.caretIndex - 1));
+        }
         break;
 
       case 'NUMBER':
@@ -37,7 +48,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
 
       // All other type are not allowed
       default:
-        console.log('Disallow event', event.key);
+        console.log('Disallow event', type, event.key);
         event.preventDefault();
     }
   }
@@ -51,7 +62,7 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
       <input
         tabIndex="0"
         autoFocus
-        type="text"
+        type="number"
         ref={(elm) => { inputElm = elm; }}
         value={editor.time}
         onFocus={() => onFocusChange(true)}
@@ -82,11 +93,9 @@ function getKeyType (key) {
     // Allowed arrows
     case 'ArrowLeft':
     case 'ArrowRight':
-      return 'HORISONTAL_ARROW'
-
     case 'ArrowUp':
     case 'ArrowDown':
-      return 'VERTICAL_ARROW'
+      return key
 
     // Allowed numbers
     case '1':

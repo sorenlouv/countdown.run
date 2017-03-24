@@ -7,8 +7,6 @@ import App from './App';
 import {debounce} from 'lodash';
 
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
-
-
 const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const store = createStore(mainReducer, persistedState, reduxMiddleware);
 
