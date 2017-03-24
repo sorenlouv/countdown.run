@@ -4,6 +4,7 @@ import Countdown from './Countdown';
 const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, onClickReset, onNotify}) => {
   return (
     <div>
+      <h2>Timers</h2>
       {countdowns.map((countdown) =>
         <Countdown
           key={countdown.id}
