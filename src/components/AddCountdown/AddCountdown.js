@@ -1,6 +1,8 @@
 import React from 'react';
 import { padStart } from 'lodash';
 import classNames from 'classnames';
+import keyCodes from './keyCodes.json';
+import {initPlay} from '../../services/alarm';
 import './AddCountdown.css';
 
 const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputChange, onFocusChange, resetEditor}) => {
@@ -19,10 +21,6 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
       addCountdown(editor.time);
       resetEditor();
     }
-
-    if (window.alarmSound.paused) {
-      window.alarmSound.play();
-    }
   }
 
   const onKeyDown = (event) => {
@@ -32,8 +30,8 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
       return;
     }
 
-    const { key } = event;
-    const type = getKeyType(key);
+    const { keyCode } = event;
+    const type = getKeyType(keyCode);
 
     switch(type) {
       case 'ArrowLeft':
@@ -83,7 +81,11 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
         onKeyDown={onKeyDown}
         onChange={(event) => onInputChange(event.target.value)}
       />
-      <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => inputElm.focus()}>
+
+      <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => {
+          initPlay();
+          inputElm.focus();
+        }}>
         <span className={`value ${getValueClass(6)}`}></span>
         <span className={`value ${getValueClass(5)}`}>{hour1}</span>
         <span className={`value ${getValueClass(4)}`}>{hour2}</span>
@@ -101,7 +103,9 @@ const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputC
   );
 }
 
-function getKeyType (key) {
+function getKeyType (keyCode) {
+  const key = keyCodes[keyCode];
+
   switch(key) {
     // Allowed keys
     case 'ArrowLeft':

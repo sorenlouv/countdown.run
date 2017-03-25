@@ -5,7 +5,7 @@ import { createStore } from 'redux';
 import mainReducer from './reducers';
 import App from './App';
 import {debounce} from 'lodash';
-import { countdownIsRinging } from './services/time'
+import { startOrStopAlarm } from './services/alarm'
 
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
 const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
@@ -16,20 +16,7 @@ const persistState = debounce(() => {
 }, 100);
 
 store.subscribe(persistState);
-
-
-// Hack: Chrome will only allows sounds to be played as part of a user action.
-// This will create a global Audio element, which will be started on the users first interaction with a volume of 0
-window.alarmSound = new Audio("https://soundbible.com/grab.php?id=1599&type=wav");
-window.alarmSound.loop = true;
-window.alarmSound.volume = 0;
-window.alarmSound.play();
-
-store.subscribe(() => {
-  const {countdowns} = store.getState();
-  const isRinging = countdowns.some(countdownIsRinging);
-  window.alarmSound.volume = isRinging ? 1 : 0;
-});
+store.subscribe(() => startOrStopAlarm(store));
 
 ReactDOM.render(
   <Provider store={store}>

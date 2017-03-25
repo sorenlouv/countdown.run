@@ -26,10 +26,12 @@
     }
 
     input {
-        height: 0px;
+        height: 0;
         position: absolute;
         opacity: 0;
-        width: 0px;
-        z-index: -2;
+        width: 1px;
+        z-index: -99;
+        top: -9999px;
+        left: -9999px;
     }
 }
