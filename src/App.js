@@ -4,7 +4,7 @@ import CountdownList from './components/CountdownList';
 import './App.css';
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div className="App">
         <AddCountdown />

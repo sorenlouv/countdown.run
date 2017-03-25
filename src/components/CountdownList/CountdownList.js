@@ -19,6 +19,6 @@ const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, 
       )}
     </div>
   );
-}
+};
 
 export default CountdownList;

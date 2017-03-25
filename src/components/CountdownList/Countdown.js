@@ -8,24 +8,24 @@ const Button = ({onClick, icon, text, style, className = ''}) => (
     <i className="material-icons left">{icon}</i>
     {text}
   </a>
-)
+);
 
 const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onClickStart, onClickDismiss, timeRemaining}) => {
   if (timeRemaining === 0) {
     return <Button className="green" text="OK" icon="done" onClick={onClickDismiss}/>;
   }
 
-  if(!startedAt) {
+  if (!startedAt) {
     return <Button className="green" text="Start" icon="play_arrow" onClick={onClickStart}/>;
   }
 
-  return pausedAt ?
-    <Button className="blue" text="Resume" icon="play_arrow" onClick={onClickResume}/> :
-    <Button className="blue"  text="Pause" icon="pause" onClick={onClickPause}/>;
+  return pausedAt
+    ? <Button className="blue" text="Resume" icon="play_arrow" onClick={onClickResume}/>
+    : <Button className="blue" text="Pause" icon="pause" onClick={onClickPause}/>;
 };
 
 export default class Countdown extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.intervalId = setInterval(() => {
       // If the countdown has completed, this should be updated in the state
       const isCompleted = getTimeRemaining(this.props) === 0;
@@ -36,11 +36,11 @@ export default class Countdown extends Component {
     }, 500);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     clearInterval(this.intervalId);
   }
 
-  render() {
+  render () {
     const timeRemaining = getTimeRemaining(this.props);
     const {hours, minutes, seconds} = msToTimeObject(timeRemaining);
     return <div className={`countdown-container ${classNames({ringing: timeRemaining === 0})}`}>
@@ -64,6 +64,6 @@ export default class Countdown extends Component {
 
           <Button className="grey" icon="replay" text="reset" onClick={this.props.onClickReset}/>
         </div>
-      </div>
+      </div>;
   }
 };

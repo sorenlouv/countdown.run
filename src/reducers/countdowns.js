@@ -2,7 +2,6 @@ import omit from 'lodash.omit';
 
 const countdown = (state = {}, action) => {
   switch (action.type) {
-
     case 'ADD_COUNTDOWN':
     case 'UPDATE_COUNTDOWN':
       return {
@@ -15,34 +14,33 @@ const countdown = (state = {}, action) => {
         ...state,
         ...omit(action, 'type'),
         pausedDuruation: state.pausedDuruation + (Date.now() - state.pausedAt)
-      }
+      };
 
     default:
-      return state
+      return state;
   }
-}
+};
 
 const countdowns = (state = [], action) => {
   switch (action.type) {
-
     case 'ADD_COUNTDOWN':
-      return [...state, countdown({}, action)]
+      return [...state, countdown({}, action)];
 
     case 'RESUME_COUNTDOWN':
     case 'UPDATE_COUNTDOWN':
       return state.map((item) => {
-        if(action.id !== item.id) {
+        if (action.id !== item.id) {
           return item;
         }
-        return countdown(item, action)
+        return countdown(item, action);
       });
 
     case 'REMOVE_COUNTDOWN':
       return state.filter(countdown => countdown.id !== action.id);
 
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default countdowns
+export default countdowns;

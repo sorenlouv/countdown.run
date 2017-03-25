@@ -10,22 +10,22 @@ const editor = (state = DEFAULT_EDITOR_STATE, action) => {
       return {
         ...state,
         time: action.time
-      }
+      };
     case 'SET_EDITOR_CARET':
       return {
         ...state,
         caretIndex: action.caretIndex
-      }
+      };
     case 'TOGGLE_EDITOR_FOCUS':
       return {
         ...state,
         hasFocus: action.hasFocus
-      }
+      };
     case 'RESET_EDITOR':
       return DEFAULT_EDITOR_STATE;
     default:
-      return state
+      return state;
   }
-}
+};
 
-export default editor
+export default editor;

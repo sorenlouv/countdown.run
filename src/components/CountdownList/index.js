@@ -1,4 +1,4 @@
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
 // Actions
 import {
@@ -9,45 +9,44 @@ import {
   resetCountdown,
   dismissCountdown,
   setIsCompleted
-} from '../../actions/countdown'
-import CountdownList from './CountdownList'
+} from '../../actions/countdown';
+import CountdownList from './CountdownList';
 
 const mapStateToProps = (state) => {
   return {
     countdowns: state.countdowns
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClickRemove(id) {
+    onClickRemove (id) {
       dispatch(removeCountdown(id));
     },
-    onClickPause(id) {
+    onClickPause (id) {
       dispatch(pauseCountdown(id));
     },
-    onClickResume(id) {
+    onClickResume (id) {
       dispatch(resumeCountdown(id));
     },
-    onClickStart(id) {
+    onClickStart (id) {
       dispatch(restartCountdown(id));
     },
-    onClickReset(id) {
+    onClickReset (id) {
       dispatch(resetCountdown(id));
     },
-    onClickDismiss(id) {
+    onClickDismiss (id) {
       dispatch(dismissCountdown(id));
     },
-    onComplete(id) {
+    onComplete (id) {
       dispatch(setIsCompleted(id));
     }
-  }
-}
+  };
+};
 
 const CountdownListContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CountdownList)
+)(CountdownList);
 
-export default CountdownListContainer
-
+export default CountdownListContainer;

@@ -21,7 +21,7 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
       addCountdown(editor.time);
       resetEditor();
     }
-  }
+  };
 
   const onKeyDown = (event) => {
     const hasModifierKey = event.ctrlKey || event.shiftKey || event.altKey || event.metaKey;
@@ -33,7 +33,7 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
     const { keyCode } = event;
     const type = getKeyType(keyCode);
 
-    switch(type) {
+    switch (type) {
       case 'ArrowLeft':
         if (editor.caretIndex < editor.time.length) {
           onCaretChange((editor.caretIndex + 1));
@@ -66,7 +66,7 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
         console.log('Disallow event', type, event.key);
         event.preventDefault();
     }
-  }
+  };
 
   return (
     <form className="add-countdown" onSubmit={submitForm}>
@@ -83,9 +83,9 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
       />
 
       <div className={`editor-container ${classNames({'has-focus': editor.hasFocus})}`} onClick={() => {
-          initPlay();
-          inputElm.focus();
-        }}>
+        initPlay();
+        inputElm.focus();
+      }}>
         <span className={`value ${getValueClass(6)}`}></span>
         <span className={`value ${getValueClass(5)}`}>{hour1}</span>
         <span className={`value ${getValueClass(4)}`}>{hour2}</span>
@@ -101,19 +101,19 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
       </div>
     </form>
   );
-}
+};
 
 function getKeyType (keyCode) {
   const key = keyCodes[keyCode];
 
-  switch(key) {
+  switch (key) {
     // Allowed keys
     case 'ArrowLeft':
     case 'ArrowRight':
     case 'ArrowUp':
     case 'ArrowDown':
     case 'Tab':
-      return key
+      return key;
 
     // Allowed numbers
     case '1':
@@ -134,7 +134,7 @@ function getKeyType (keyCode) {
       return 'PASS_THROUGH';
 
     default:
-      return 'UNKNOWN_TYPE'
+      return 'UNKNOWN_TYPE';
   }
 }
 

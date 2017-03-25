@@ -15,31 +15,31 @@ export const addCountdown = (time) => {
     id: getUniqueId(),
     time,
     startedAt: Date.now()
-  }
-}
+  };
+};
 
 export const removeCountdown = (id) => {
   return {
     type: 'REMOVE_COUNTDOWN',
     id
-  }
-}
+  };
+};
 
 export const resumeCountdown = (id) => {
   return {
     type: 'RESUME_COUNTDOWN',
     id,
     pausedAt: null
-  }
-}
+  };
+};
 
 export const pauseCountdown = (id) => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
     pausedAt: Date.now()
-  }
-}
+  };
+};
 
 // Reset without restart
 export const resetCountdown = (id) => {
@@ -47,8 +47,8 @@ export const resetCountdown = (id) => {
     type: 'UPDATE_COUNTDOWN',
     id,
     ...DEFAULT_COUNTDOWN
-  }
-}
+  };
+};
 
 // reset and restart
 export const restartCountdown = (id) => {
@@ -57,8 +57,8 @@ export const restartCountdown = (id) => {
     id,
     ...DEFAULT_COUNTDOWN,
     startedAt: Date.now()
-  }
-}
+  };
+};
 
 export const dismissCountdown = (id) => {
   return {
@@ -66,17 +66,17 @@ export const dismissCountdown = (id) => {
     id,
     ...DEFAULT_COUNTDOWN,
     isDismissed: true
-  }
-}
+  };
+};
 
 export const setIsCompleted = (id) => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
     isCompleted: true
-  }
-}
+  };
+};
 
-function getUniqueId() {
-	return crypto.randomBytes(32).toString('hex');
+function getUniqueId () {
+  return crypto.randomBytes(32).toString('hex');
 }
