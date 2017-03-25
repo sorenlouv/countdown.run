@@ -3,6 +3,7 @@ import padStart from 'lodash.padstart';
 import classNames from 'classnames';
 import keyCodes from './keyCodes.json';
 import {initPlay} from '../../services/alarm';
+import * as analytics from '../../services/analytics';
 import './AddCountdown.css';
 
 const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFocusChange, resetEditor}) => {
@@ -21,6 +22,7 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
       addCountdown(editor.time);
       resetEditor();
     }
+    analytics.addCountdown(editor.time);
   };
 
   const onKeyDown = (event) => {

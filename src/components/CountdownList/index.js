@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import * as analytics from '../../services/analytics';
 
 // Actions
 import {
@@ -21,21 +22,27 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onClickRemove (id) {
+      analytics.removeCountdown();
       dispatch(removeCountdown(id));
     },
     onClickPause (id) {
+      analytics.pauseCountdown();
       dispatch(pauseCountdown(id));
     },
     onClickResume (id) {
+      analytics.resumeCountdown();
       dispatch(resumeCountdown(id));
     },
     onClickStart (id) {
+      analytics.startCountdown();
       dispatch(restartCountdown(id));
     },
     onClickReset (id) {
+      analytics.resetCountdown();
       dispatch(resetCountdown(id));
     },
     onClickDismiss (id) {
+      analytics.dismissCountdown();
       dispatch(dismissCountdown(id));
     },
     onComplete (id) {
