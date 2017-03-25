@@ -1,14 +1,14 @@
 import React from 'react';
 import Countdown from './Countdown';
 
-const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, onClickStart, onClickReset, onClickDismiss, onStartRinging}) => {
+const CountdownList = ({countdowns, onClickRemove, onClickPause, onClickResume, onClickStart, onClickReset, onClickDismiss, onComplete}) => {
   return (
     <div>
       {countdowns.map((countdown) =>
         <Countdown
           key={countdown.id}
           {...countdown}
-          onStartRinging={() => onStartRinging(countdown.id)}
+          onComplete={() => onComplete(countdown.id)}
           onClickRemove={() => onClickRemove(countdown.id)}
           onClickPause={() => onClickPause(countdown.id)}
           onClickResume={() => onClickResume(countdown.id)}

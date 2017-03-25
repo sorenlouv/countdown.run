@@ -5,7 +5,7 @@ import keyCodes from './keyCodes.json';
 import {initPlay} from '../../services/alarm';
 import './AddCountdown.css';
 
-const AddCountdown = ({editor, countdowns, addCountdown, onCaretChange, onInputChange, onFocusChange, resetEditor}) => {
+const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFocusChange, resetEditor}) => {
   let inputElm;
   const [hour1, hour2, min1, min2, sec1, sec2] = padStart(editor.time, 6, '0').split('');
   const getValueClass = (index) => {

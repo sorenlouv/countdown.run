@@ -1,5 +1,4 @@
 import once from 'lodash.once';
-import { countdownIsRinging } from './time'
 
 // Hack: Mobile devices will only allows sounds to be played as part of a user action.
 // This will create a global Audio element, which will be started on the users first interaction with a volume of 0
@@ -8,10 +7,10 @@ alarmSound.loop = true;
 
 export const startOrStopAlarm = (store) => {
   const { countdowns } = store.getState();
-  const isRinging = countdowns.some(countdownIsRinging);
-  if (isRinging && alarmSound.paused) {
+  const shouldRing = countdowns.some(countdown => countdown.isCompleted && !countdown.isDismissed);
+  if (shouldRing && alarmSound.paused) {
     alarmSound.play();
-  } else if(!isRinging) {
+  } else if(!shouldRing) {
     alarmSound.pause();
   }
 };

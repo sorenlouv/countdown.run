@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { msToTimeObject, getTimeRemaining, countdownIsRinging } from '../../services/time';
+import { msToTimeObject, getTimeRemaining } from '../../services/time';
 import classNames from 'classnames';
 import './Countdown.css';
 
@@ -27,8 +27,10 @@ const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onCl
 export default class Countdown extends Component {
   componentDidMount() {
     this.intervalId = setInterval(() => {
-      if (countdownIsRinging(this.props) && !this.props.isRinging) {
-        this.props.onStartRinging();
+      // If the countdown has completed, this should be updated in the state
+      const isCompleted = getTimeRemaining(this.props) === 0;
+      if (isCompleted && !this.props.isCompleted) {
+        this.props.onComplete();
       }
       this.forceUpdate();
     }, 500);

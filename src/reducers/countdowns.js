@@ -1,22 +1,19 @@
 import omit from 'lodash.omit';
 
-function updatedStated(state, action) {
-  return {
-    ...state,
-    ...omit(action, 'type')
-  };
-}
-
 const countdown = (state = {}, action) => {
   switch (action.type) {
 
     case 'ADD_COUNTDOWN':
     case 'UPDATE_COUNTDOWN':
-      return updatedStated(state, action)
+      return {
+        ...state,
+        ...omit(action, 'type')
+      };
 
     case 'RESUME_COUNTDOWN':
       return {
-        ...updatedStated(state, action),
+        ...state,
+        ...omit(action, 'type'),
         pausedDuruation: state.pausedDuruation + (Date.now() - state.pausedAt)
       }
 

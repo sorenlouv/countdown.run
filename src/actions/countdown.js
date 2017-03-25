@@ -5,7 +5,7 @@ const DEFAULT_COUNTDOWN = {
   pausedAt: null,
   startedAt: null,
   isDismissed: false,
-  isRinging: false
+  isCompleted: false
 };
 
 export const addCountdown = (time) => {
@@ -69,11 +69,11 @@ export const dismissCountdown = (id) => {
   }
 }
 
-export const setIsRinging = (id) => {
+export const setIsCompleted = (id) => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
-    isRinging: true
+    isCompleted: true
   }
 }
 

@@ -27,8 +27,3 @@ export function getTimeRemaining(countdown) {
 
     return timeRemaining;
 }
-
-export function countdownIsRinging(countdown) {
-  const isStarted = countdown.startedAt > 0;
-  return isStarted && !countdown.isDismissed && getTimeRemaining(countdown) === 0;
-}
