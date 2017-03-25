@@ -1,0 +1,29 @@
+@import '../variables.scss';
+
+.countdown-list {
+    &.empty {
+        height: $unit * 10;
+        border-top: 1px solid #ccc;
+
+        .content {
+            text-align: center;
+            color: #444;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+
+            .material-icons {
+                font-size: 46px;
+            }
+
+            .header {
+                font-size: 26px;
+            }
+
+            .sub-header {
+                font-style: italic;
+                margin-top: -$unit-quarter;
+            }
+        }
+    }
+}

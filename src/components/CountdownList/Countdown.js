@@ -5,7 +5,7 @@ import './Countdown.css';
 
 const Button = ({onClick, icon, text, style, className = ''}) => (
   <a className={`waves-effect btn-small waves-light btn ${className}`} style={style} onClick={onClick}>
-    <i className="material-icons left">{icon}</i>
+    <i className={`material-icons ${text ? 'left' : ''}`}>{icon}</i>
     {text}
   </a>
 );
@@ -16,12 +16,12 @@ const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onCl
   }
 
   if (!startedAt) {
-    return <Button className="green" text="Start" icon="play_arrow" onClick={onClickStart}/>;
+    return <Button className="green" icon="play_arrow" onClick={onClickStart}/>;
   }
 
   return pausedAt
-    ? <Button className="blue" text="Resume" icon="play_arrow" onClick={onClickResume}/>
-    : <Button className="blue" text="Pause" icon="pause" onClick={onClickPause}/>;
+    ? <Button className="green" icon="play_arrow" onClick={onClickResume}/>
+    : <Button className="blue" icon="pause" onClick={onClickPause}/>;
 };
 
 export default class Countdown extends Component {
@@ -43,17 +43,26 @@ export default class Countdown extends Component {
   render () {
     const timeRemaining = getTimeRemaining(this.props);
     const {hours, minutes, seconds} = msToTimeObject(timeRemaining);
+
+    const TimePartial = ({value, unit}) => {
+      if (value === '00' && (unit === 'h' || (unit === 'm' && timeRemaining < 3600 * 1000))) {
+        return null;
+      }
+
+      return (
+        <span>
+          <span className="value">{value}</span>
+          <span className="unit">{unit}</span>
+        </span>
+      );
+    };
+
     return <div className={`countdown-container ${classNames({ringing: timeRemaining === 0})}`}>
         <div>
           <i className="material-icons delete-button" onClick={this.props.onClickRemove}>delete</i>
-          <span className="value">{hours}</span>
-          <span className="unit">h</span>
-
-          <span className="value">{minutes}</span>
-          <span className="unit">m</span>
-
-          <span className="value">{seconds}</span>
-          <span className="unit">s</span>
+          <TimePartial value={hours} unit="h" />
+          <TimePartial value={minutes} unit="m" />
+          <TimePartial value={seconds} unit="s" />
         </div>
 
         <div className="controls">
@@ -62,7 +71,7 @@ export default class Countdown extends Component {
             onClickDismiss={this.props.onClickDismiss}
             timeRemaining={timeRemaining}/>
 
-          <Button className="grey" icon="replay" text="reset" onClick={this.props.onClickReset}/>
+          <Button className="grey" text="reset" icon="replay" onClick={this.props.onClickReset}/>
         </div>
       </div>;
   }

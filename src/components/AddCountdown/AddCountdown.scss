@@ -6,6 +6,7 @@
         text-align: center;
         user-select: none;
         cursor: pointer;
+        margin: 0 $unit-half;
 
         &.has-focus .value.selected {
             border-right: 1px solid black;
