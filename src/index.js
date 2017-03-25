@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import mainReducer from './reducers';
 import App from './App';
-import {debounce} from 'lodash';
+import debounce from 'lodash.debounce';
 import { startOrStopAlarm } from './services/alarm'
 
 const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};

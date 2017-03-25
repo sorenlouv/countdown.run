@@ -1,4 +1,4 @@
-import { once } from 'lodash';
+import once from 'lodash.once';
 import { countdownIsRinging } from './time'
 
 // Hack: Mobile devices will only allows sounds to be played as part of a user action.

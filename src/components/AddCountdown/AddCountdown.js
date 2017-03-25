@@ -1,5 +1,5 @@
 import React from 'react';
-import { padStart } from 'lodash';
+import padStart from 'lodash.padstart';
 import classNames from 'classnames';
 import keyCodes from './keyCodes.json';
 import {initPlay} from '../../services/alarm';

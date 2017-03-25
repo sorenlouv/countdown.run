@@ -1,4 +1,4 @@
-import { padStart } from 'lodash';
+import padStart from 'lodash.padstart';
 
 export function msToTimeObject(duration) {
   const durationSeconds = duration / 1000;

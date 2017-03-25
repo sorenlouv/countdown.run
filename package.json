@@ -5,7 +5,10 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.5",
-    "lodash": "^4.17.4",
+    "lodash.debounce": "^4.0.8",
+    "lodash.omit": "^4.5.0",
+    "lodash.once": "^4.1.1",
+    "lodash.padstart": "^4.6.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
