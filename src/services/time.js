@@ -1,7 +1,7 @@
 import padStart from 'lodash.padstart';
 
 export function msToTimeObject (duration) {
-  const durationSeconds = duration / 1000;
+  const durationSeconds = Math.ceil(duration / 1000);
   const seconds = padStart(parseInt(durationSeconds % 60, 10), 2, '0');
   const minutes = padStart(parseInt((durationSeconds / 60) % 60, 10), 2, '0');
   const hours = padStart(parseInt(durationSeconds / 3600, 10), 2, '0');
