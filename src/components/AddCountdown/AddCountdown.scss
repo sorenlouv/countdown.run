@@ -13,7 +13,7 @@
         }
 
         .value {
-            font-size: $fontsize-xxxbig;
+            font-size: 50px;
             border-right: 1px solid white;
             color: #ccc;
             &.active {
@@ -23,6 +23,10 @@
         .unit {
             margin-right: $unit-half;
             font-size: 22px;
+        }
+
+        .add-countdown-button {
+            margin-top: -28px;
         }
     }
 

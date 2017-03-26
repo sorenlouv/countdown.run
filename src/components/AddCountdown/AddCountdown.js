@@ -100,6 +100,11 @@ const AddCountdown = ({editor, addCountdown, onCaretChange, onInputChange, onFoc
         <span className={`value ${getValueClass(1)}`}>{sec1}</span>
         <span className={`value ${getValueClass(0)}`}>{sec2}</span>
         <span className="unit">s</span>
+
+        <a onClick={submitForm} className={`waves-effect btn-small waves-light btn green add-countdown-button`}>
+          <i className="material-icons">add_alert</i>
+        </a>
+
       </div>
     </form>
   );
