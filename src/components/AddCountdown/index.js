@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // Actions
 import { addCountdown } from '../../actions/countdown';
 import { setEditorCaret, setEditorTime, toggleEditorFocus, resetEditor } from '../../actions/editor';
-
+import * as analytics from '../../services/analytics';
 import AddCountdown from './AddCountdown';
 
 const mapStateToProps = (state) => {
@@ -15,6 +15,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addCountdown: (time) => {
+      analytics.addCountdown(time);
       dispatch(addCountdown(time));
     },
     onCaretChange: (index) => {
