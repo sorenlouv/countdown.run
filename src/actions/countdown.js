@@ -8,7 +8,7 @@ const DEFAULT_COUNTDOWN = {
   isCompleted: false
 };
 
-export const addCountdown = (time) => {
+export const addCountdown = (time = []) => {
   return {
     type: 'ADD_COUNTDOWN',
     ...DEFAULT_COUNTDOWN,

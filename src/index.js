@@ -7,12 +7,13 @@ import App from './App';
 import debounce from 'lodash.debounce';
 import { startOrStopAlarm } from './services/alarm';
 
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(localStorage.getItem('reduxState')) : {};
+const LOCALE_STORAGE_NAME = 'reduxState-v1';
+const persistedState = getValidPersistedState(LOCALE_STORAGE_NAME);
 const reduxMiddleware = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 const store = createStore(mainReducer, persistedState, reduxMiddleware);
 
 const persistState = debounce(() => {
-  localStorage.setItem('reduxState', JSON.stringify(store.getState()));
+  localStorage.setItem(LOCALE_STORAGE_NAME, JSON.stringify(store.getState()));
 }, 100);
 
 store.subscribe(persistState);
@@ -24,3 +25,9 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
+
+function getValidPersistedState (name) {
+  const stateRaw = localStorage.getItem(name);
+  const state = stateRaw ? JSON.parse(stateRaw) : {};
+  return state;
+}
