@@ -19,7 +19,6 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
       event.metaKey;
 
     if (hasModifierKey) {
-      event.preventDefault();
       return;
     }
 

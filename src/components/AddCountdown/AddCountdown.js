@@ -23,7 +23,7 @@ const AddCountdown = ({editor, addCountdown, resetEditor}) => {
       case 0: return 's';
       case 2: return 'm';
       case 4: return 'h';
-      default: return '';
+      default: return null;
     }
   }
 
@@ -45,7 +45,7 @@ const AddCountdown = ({editor, addCountdown, resetEditor}) => {
                 />
 
               {
-                (i + 1) % 2 ? <span className="unit">{getUnit(i)}</span> : null
+                getUnit(i) ? <span className="unit">{getUnit(i)}</span> : null
               }
             </span>;
           })
