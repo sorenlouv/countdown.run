@@ -24,7 +24,7 @@ const countdown = (state = {}, action) => {
 const countdowns = (state = [], action) => {
   switch (action.type) {
     case 'ADD_COUNTDOWN':
-      return [...state, countdown({}, action)];
+      return [countdown({}, action), ...state];
 
     case 'RESUME_COUNTDOWN':
     case 'UPDATE_COUNTDOWN':

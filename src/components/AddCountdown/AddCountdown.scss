@@ -8,18 +8,6 @@
         cursor: pointer;
         margin: 0 $unit-half;
 
-        &.has-focus .value.selected {
-            border-right: 1px solid black;
-        }
-
-        .value {
-            font-size: 50px;
-            border-right: 1px solid white;
-            color: #ccc;
-            &.active {
-                color: #000;
-            }
-        }
         .unit {
             margin-right: $unit-half;
             font-size: 22px;
@@ -28,15 +16,5 @@
         .add-countdown-button {
             margin-top: -28px;
         }
-    }
-
-    input {
-        height: 0;
-        position: absolute;
-        opacity: 0;
-        width: 1px;
-        z-index: -99;
-        top: -9999px;
-        left: -9999px;
     }
 }

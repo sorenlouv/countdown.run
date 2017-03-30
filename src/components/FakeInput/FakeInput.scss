@@ -1,0 +1,30 @@
+@import '../variables.scss';
+
+.fake-input {
+    .has-focus & .value.selected {
+        border-right: 1px solid black;
+    }
+
+    // .value.selected {
+    //     border-right: 1px solid black;
+    // }
+
+    .value {
+        font-size: 50px;
+        border-right: 1px solid white;
+        color: #ccc;
+        &.active {
+            color: #000;
+        }
+    }
+
+    input {
+        height: 0;
+        left: -100px;
+        opacity: 0;
+        width: 1px;
+        z-index: -99;
+        top: -9999px;
+        left: -9999px;
+    }
+}
