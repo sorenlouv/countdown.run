@@ -5,8 +5,6 @@ import keyCodes from './keyCodes.json';
 import './FakeInput.css';
 
 const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBackspace, onBlur, onFocus, onInputClick, incrementCaret, decrementCaret}) => {
-  let inputElm;
-
   const getCSSClass = () => {
     return classNames({
       selected: isSelected,
@@ -65,15 +63,13 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
   return (
     <span onClick={(e) => {
       initPlay();
-      inputElm.setSelectionRange(1, 1);
       onInputClick();
     }} className="fake-input">
 
       <input
-        type="text"
+        type="number"
         pattern="\d*"
         ref={(elm) => {
-          inputElm = elm;
           if (elm && isSelected) {
             elm.focus();
           }
