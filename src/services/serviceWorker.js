@@ -1,5 +1,7 @@
 export default function initServiceWorker (store) {
   if ('serviceWorker' in navigator) {
+    Notification.requestPermission();
+
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
         .then((registration) => {
@@ -10,4 +12,11 @@ export default function initServiceWorker (store) {
         });
     });
   }
+
+  store.subscribe(() => {
+    const { countdowns } = store.getState();
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage(countdowns);
+    }
+  });
 }
