@@ -4,10 +4,10 @@ import FakeInput from '../FakeInput';
 import './AddCountdown.css';
 
 const AddCountdown = ({editor, addCountdown, resetEditor}) => {
-  const timeString = editor.time.slice().reverse().map((t) => t || 0).join('');
+  const timeString = parseInt(editor.time.slice().reverse().map((t) => t || 0).join(''), 10);
 
   const submitForm = () => {
-    if (parseInt(timeString, 10) > 0) {
+    if (timeString > 0) {
       addCountdown(timeString);
       resetEditor();
     }

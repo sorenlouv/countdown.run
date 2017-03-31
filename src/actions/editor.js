@@ -21,7 +21,7 @@ export const decrementCaret = () => {
 export const setEditorCaret = (caretIndex) => {
   return {
     type: 'SET_EDITOR_CARET',
-    caretIndex
+    caretIndex: caretIndex - (caretIndex % 2)
   };
 };
 
