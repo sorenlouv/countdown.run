@@ -77,6 +77,7 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
         onKeyDown={onKeyDown}
         onBlur={onBlur}
         onFocus={onFocus}
+        onChange={(event) => { value = event.target.value; }}
       />
       <span className={`value ${getCSSClass()}`}>{value || '0'}</span>
     </span>
