@@ -5,7 +5,7 @@ const urlsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://fonts.gstatic.com/s/materialicons/v21/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2',
-  'http://localhost:3000/alarm.wav'
+  '/alarm.wav'
 ];
 
 // populate cache
