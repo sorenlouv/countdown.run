@@ -1,11 +1,10 @@
 const CACHE_NAME = 'cache-v1';
 const urlsToCache = [
-  '/static/js/bundle.js',
-  '/',
+  'static/js/bundle.js',
   'https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css',
   'https://fonts.googleapis.com/icon?family=Material+Icons',
   'https://fonts.gstatic.com/s/materialicons/v21/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2',
-  '/alarm.wav'
+  'alarm.wav'
 ];
 
 // populate cache
