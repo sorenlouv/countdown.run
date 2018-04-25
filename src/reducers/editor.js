@@ -6,8 +6,10 @@ const DEFAULT_EDITOR_STATE = {
 
 const editor = (state = DEFAULT_EDITOR_STATE, action) => {
   switch (action.type) {
-    case 'SET_EDITOR_TIME':
-      const emptyIndex = state.time.slice(action.index).findIndex((i) => i === '');
+    case 'SET_EDITOR_TIME': {
+      const emptyIndex = state.time
+        .slice(action.index)
+        .findIndex(i => i === '');
 
       return {
         ...state,
@@ -17,8 +19,9 @@ const editor = (state = DEFAULT_EDITOR_STATE, action) => {
           ...state.time.slice(action.index).filter((t, i) => i !== emptyIndex)
         ].slice(0, 6)
       };
+    }
 
-    case 'INCREMENT_CARET':
+    case 'INCREMENT_CARET': {
       const nextCaret = state.caretIndex + 1;
       if (state.time.length < nextCaret || nextCaret > 5) {
         return state;
@@ -28,6 +31,7 @@ const editor = (state = DEFAULT_EDITOR_STATE, action) => {
         ...state,
         caretIndex: nextCaret
       };
+    }
 
     case 'DECREMENT_CARET': {
       const nextCaret = state.caretIndex - 1;

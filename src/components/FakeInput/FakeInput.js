@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {initPlay} from '../../services/alarm';
 import classNames from 'classnames';
 import keyCodes from './keyCodes.json';
@@ -60,7 +61,7 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
   }
 
   return (
-    <span onClick={(e) => {
+    <span onClick={() => {
       initPlay();
       onInputClick();
     }} className="fake-input">
@@ -85,7 +86,7 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
 };
 
 FakeInput.propTypes = {
-  index: React.PropTypes.number
+  index:  PropTypes.number
 };
 
 export default FakeInput;
