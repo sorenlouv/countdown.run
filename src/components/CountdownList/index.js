@@ -13,47 +13,46 @@ import {
 } from '../../actions/countdown';
 import CountdownList from './CountdownList';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     countdowns: state.countdowns
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onClickRemove (id) {
+    onClickRemove(id) {
       analytics.removeCountdown();
       dispatch(removeCountdown(id));
     },
-    onClickPause (id) {
+    onClickPause(id) {
       analytics.pauseCountdown();
       dispatch(pauseCountdown(id));
     },
-    onClickResume (id) {
+    onClickResume(id) {
       analytics.resumeCountdown();
       dispatch(resumeCountdown(id));
     },
-    onClickStart (id) {
+    onClickStart(id) {
       analytics.startCountdown();
       dispatch(restartCountdown(id));
     },
-    onClickReset (id) {
+    onClickReset(id) {
       analytics.resetCountdown();
       dispatch(resetCountdown(id));
     },
-    onClickDismiss (id) {
+    onClickDismiss(id) {
       analytics.dismissCountdown();
       dispatch(dismissCountdown(id));
     },
-    onComplete (id) {
+    onComplete(id) {
       dispatch(setIsCompleted(id));
     }
   };
 };
 
-const CountdownListContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CountdownList);
+const CountdownListContainer = connect(mapStateToProps, mapDispatchToProps)(
+  CountdownList
+);
 
 export default CountdownListContainer;

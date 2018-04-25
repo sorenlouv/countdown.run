@@ -18,21 +18,21 @@ export const decrementCaret = () => {
   };
 };
 
-export const setEditorCaret = (caretIndex) => {
+export const setEditorCaret = caretIndex => {
   return {
     type: 'SET_EDITOR_CARET',
-    caretIndex: caretIndex - (caretIndex % 2)
+    caretIndex: caretIndex - caretIndex % 2
   };
 };
 
-export const clearInput = (index) => {
+export const clearInput = index => {
   return {
     type: 'CLEAR_INPUT',
     index
   };
 };
 
-export const toggleEditorFocus = (hasFocus) => {
+export const toggleEditorFocus = hasFocus => {
   return {
     type: 'TOGGLE_EDITOR_FOCUS',
     hasFocus

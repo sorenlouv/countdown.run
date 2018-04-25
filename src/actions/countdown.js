@@ -18,14 +18,14 @@ export const addCountdown = (time = []) => {
   };
 };
 
-export const removeCountdown = (id) => {
+export const removeCountdown = id => {
   return {
     type: 'REMOVE_COUNTDOWN',
     id
   };
 };
 
-export const resumeCountdown = (id) => {
+export const resumeCountdown = id => {
   return {
     type: 'RESUME_COUNTDOWN',
     id,
@@ -33,7 +33,7 @@ export const resumeCountdown = (id) => {
   };
 };
 
-export const pauseCountdown = (id) => {
+export const pauseCountdown = id => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
@@ -42,7 +42,7 @@ export const pauseCountdown = (id) => {
 };
 
 // Reset without restart
-export const resetCountdown = (id) => {
+export const resetCountdown = id => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
@@ -51,7 +51,7 @@ export const resetCountdown = (id) => {
 };
 
 // reset and restart
-export const restartCountdown = (id) => {
+export const restartCountdown = id => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
@@ -60,7 +60,7 @@ export const restartCountdown = (id) => {
   };
 };
 
-export const dismissCountdown = (id) => {
+export const dismissCountdown = id => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
@@ -69,7 +69,7 @@ export const dismissCountdown = (id) => {
   };
 };
 
-export const setIsCompleted = (id) => {
+export const setIsCompleted = id => {
   return {
     type: 'UPDATE_COUNTDOWN',
     id,
@@ -77,6 +77,6 @@ export const setIsCompleted = (id) => {
   };
 };
 
-function getUniqueId () {
+function getUniqueId() {
   return crypto.randomBytes(32).toString('hex');
 }

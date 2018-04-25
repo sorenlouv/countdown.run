@@ -7,7 +7,7 @@ export const trackEvent = ({ category, action, label }) => {
   });
 };
 
-export const addCountdown = (time) => {
+export const addCountdown = time => {
   return trackEvent({
     category: 'countdown',
     action: 'add',

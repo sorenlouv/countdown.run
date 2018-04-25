@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {initPlay} from '../../services/alarm';
+import { initPlay } from '../../services/alarm';
 import classNames from 'classnames';
 import keyCodes from './keyCodes.json';
 import './FakeInput.css';
 
-const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBackspace, onBlur, onFocus, onInputClick, incrementCaret, decrementCaret}) => {
+const FakeInput = ({
+  isSelected,
+  isActive,
+  value,
+  submitForm,
+  onInputChange,
+  onBackspace,
+  onBlur,
+  onFocus,
+  onInputClick,
+  incrementCaret,
+  decrementCaret
+}) => {
   const getCSSClass = () => {
     return classNames({
       selected: isSelected,
@@ -13,11 +25,9 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
     });
   };
 
-  function onKeyDown (event) {
-    const hasModifierKey = event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey ||
-      event.metaKey;
+  function onKeyDown(event) {
+    const hasModifierKey =
+      event.ctrlKey || event.shiftKey || event.altKey || event.metaKey;
 
     if (hasModifierKey) {
       return;
@@ -61,15 +71,17 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
   }
 
   return (
-    <span onClick={() => {
-      initPlay();
-      onInputClick();
-    }} className="fake-input">
-
+    <span
+      onClick={() => {
+        initPlay();
+        onInputClick();
+      }}
+      className="fake-input"
+    >
       <input
         type="number"
         pattern="\d*"
-        ref={(elm) => {
+        ref={elm => {
           if (elm && isSelected) {
             elm.focus();
           }
@@ -78,7 +90,9 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
         onKeyDown={onKeyDown}
         onBlur={onBlur}
         onFocus={onFocus}
-        onChange={(event) => { value = event.target.value; }}
+        onChange={event => {
+          value = event.target.value;
+        }}
       />
       <span className={`value ${getCSSClass()}`}>{value || '0'}</span>
     </span>
@@ -86,12 +100,12 @@ const FakeInput = ({isSelected, isActive, value, submitForm, onInputChange, onBa
 };
 
 FakeInput.propTypes = {
-  index:  PropTypes.number
+  index: PropTypes.number
 };
 
 export default FakeInput;
 
-function getKeyType (key) {
+function getKeyType(key) {
   switch (key) {
     case '1':
     case '2':

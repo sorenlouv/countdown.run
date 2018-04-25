@@ -1,31 +1,54 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { msToTimeObject, getTimeRemaining } from '../../services/time';
 import classNames from 'classnames';
 import './Countdown.css';
 
-const Button = ({onClick, icon, text, style, className = ''}) => (
-  <a className={`waves-effect btn-small waves-light btn ${className}`} style={style} onClick={onClick}>
+const Button = ({ onClick, icon, text, style, className = '' }) => (
+  <a
+    className={`waves-effect btn-small waves-light btn ${className}`}
+    style={style}
+    onClick={onClick}
+  >
     <i className={`material-icons ${text ? 'left' : ''}`}>{icon}</i>
     {text}
   </a>
 );
 
-const StartStopButton = ({pausedAt, startedAt, onClickPause, onClickResume, onClickStart, onClickDismiss, timeRemaining}) => {
+const StartStopButton = ({
+  pausedAt,
+  startedAt,
+  onClickPause,
+  onClickResume,
+  onClickStart,
+  onClickDismiss,
+  timeRemaining
+}) => {
   if (timeRemaining === 0) {
-    return <Button className="green" text="OK" icon="done" onClick={onClickDismiss}/>;
+    return (
+      <Button
+        className="green"
+        text="OK"
+        icon="done"
+        onClick={onClickDismiss}
+      />
+    );
   }
 
   if (!startedAt) {
-    return <Button className="green" icon="play_arrow" onClick={onClickStart}/>;
+    return (
+      <Button className="green" icon="play_arrow" onClick={onClickStart} />
+    );
   }
 
-  return pausedAt
-    ? <Button className="green" icon="play_arrow" onClick={onClickResume}/>
-    : <Button className="blue" icon="pause" onClick={onClickPause}/>;
+  return pausedAt ? (
+    <Button className="green" icon="play_arrow" onClick={onClickResume} />
+  ) : (
+    <Button className="blue" icon="pause" onClick={onClickPause} />
+  );
 };
 
 export default class Countdown extends Component {
-  componentDidMount () {
+  componentDidMount() {
     this.intervalId = setInterval(() => {
       // If the countdown has completed, this should be updated in the state
       const isCompleted = getTimeRemaining(this.props) === 0;
@@ -36,16 +59,19 @@ export default class Countdown extends Component {
     }, 500);
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     clearInterval(this.intervalId);
   }
 
-  render () {
+  render() {
     const timeRemaining = getTimeRemaining(this.props);
-    const {hours, minutes, seconds} = msToTimeObject(timeRemaining);
+    const { hours, minutes, seconds } = msToTimeObject(timeRemaining);
 
-    const TimePartial = ({value, unit}) => {
-      if (value === '00' && (unit === 'h' || (unit === 'm' && timeRemaining < 3600 * 1000))) {
+    const TimePartial = ({ value, unit }) => {
+      if (
+        value === '00' &&
+        (unit === 'h' || (unit === 'm' && timeRemaining < 3600 * 1000))
+      ) {
         return null;
       }
 
@@ -57,9 +83,19 @@ export default class Countdown extends Component {
       );
     };
 
-    return <div className={`countdown-container ${classNames({ringing: timeRemaining === 0})}`}>
+    return (
+      <div
+        className={`countdown-container ${classNames({
+          ringing: timeRemaining === 0
+        })}`}
+      >
         <div>
-          <i className="material-icons delete-button" onClick={this.props.onClickRemove}>delete</i>
+          <i
+            className="material-icons delete-button"
+            onClick={this.props.onClickRemove}
+          >
+            delete
+          </i>
           <TimePartial value={hours} unit="h" />
           <TimePartial value={minutes} unit="m" />
           <TimePartial value={seconds} unit="s" />
@@ -69,10 +105,17 @@ export default class Countdown extends Component {
           <StartStopButton
             {...this.props}
             onClickDismiss={this.props.onClickDismiss}
-            timeRemaining={timeRemaining}/>
+            timeRemaining={timeRemaining}
+          />
 
-          <Button className="grey" text="reset" icon="replay" onClick={this.props.onClickReset}/>
+          <Button
+            className="grey"
+            text="reset"
+            icon="replay"
+            onClick={this.props.onClickReset}
+          />
         </div>
-      </div>;
+      </div>
+    );
   }
-};
+}

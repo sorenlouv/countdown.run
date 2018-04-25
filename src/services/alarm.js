@@ -5,9 +5,11 @@ import once from 'lodash.once';
 const alarmSound = new Audio('/alarm.wav');
 alarmSound.loop = true;
 
-export const startOrStopAlarm = (store) => {
+export const startOrStopAlarm = store => {
   const { countdowns } = store.getState();
-  const shouldRing = countdowns.some(countdown => countdown.isCompleted && !countdown.isDismissed);
+  const shouldRing = countdowns.some(
+    countdown => countdown.isCompleted && !countdown.isDismissed
+  );
   if (shouldRing && alarmSound.paused) {
     alarmSound.play();
   } else if (!shouldRing) {

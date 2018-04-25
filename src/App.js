@@ -4,15 +4,17 @@ import CountdownList from './components/CountdownList';
 import './App.css';
 
 class App extends Component {
-  render () {
+  render() {
     return (
       <div className="app-container">
         <div className="App">
           <AddCountdown />
-          <CountdownList/>
+          <CountdownList />
         </div>
         <div className="footer">
-          Created by <a href="https://twitter.com/sqrendk">Søren Louv-Jansen</a>. Open-sourced on <a href="https://github.com/sqren/countdown.run">Github</a>
+          Created by <a href="https://twitter.com/sqrendk">Søren Louv-Jansen</a>.
+          Open-sourced on{' '}
+          <a href="https://github.com/sqren/countdown.run">Github</a>
         </div>
       </div>
     );

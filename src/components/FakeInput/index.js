@@ -1,10 +1,17 @@
 import { connect } from 'react-redux';
 
 // Actions
-import { setEditorTime, decrementCaret, incrementCaret, clearInput, setEditorCaret, toggleEditorFocus } from '../../actions/editor';
+import {
+  setEditorTime,
+  decrementCaret,
+  incrementCaret,
+  clearInput,
+  setEditorCaret,
+  toggleEditorFocus
+} from '../../actions/editor';
 import FakeInput from './FakeInput';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     editor: state.editor
   };
@@ -12,36 +19,35 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, props) => {
   return {
-    incrementCaret () {
+    incrementCaret() {
       dispatch(incrementCaret());
     },
-    decrementCaret () {
+    decrementCaret() {
       dispatch(decrementCaret());
     },
-    onInputClick () {
+    onInputClick() {
       dispatch(setEditorCaret(props.inputIndex));
     },
-    onKeyDown () {
+    onKeyDown() {
       // dispatch(setEditorCaret(props.inputIndex));
     },
-    onBackspace () {
+    onBackspace() {
       dispatch(clearInput(props.inputIndex));
     },
-    onInputChange (value) {
+    onInputChange(value) {
       dispatch(setEditorTime(props.inputIndex, value));
     },
-    onBlur () {
+    onBlur() {
       dispatch(toggleEditorFocus(false));
     },
-    onFocus () {
+    onFocus() {
       dispatch(toggleEditorFocus(true));
     }
   };
 };
 
-const FakeInputContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FakeInput);
+const FakeInputContainer = connect(mapStateToProps, mapDispatchToProps)(
+  FakeInput
+);
 
 export default FakeInputContainer;

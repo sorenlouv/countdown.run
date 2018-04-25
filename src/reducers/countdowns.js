@@ -28,7 +28,7 @@ const countdowns = (state = [], action) => {
 
     case 'RESUME_COUNTDOWN':
     case 'UPDATE_COUNTDOWN':
-      return state.map((item) => {
+      return state.map(item => {
         if (action.id !== item.id) {
           return item;
         }

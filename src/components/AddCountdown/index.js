@@ -6,15 +6,15 @@ import { resetEditor } from '../../actions/editor';
 import * as analytics from '../../services/analytics';
 import AddCountdown from './AddCountdown';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     editor: state.editor
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    addCountdown: (time) => {
+    addCountdown: time => {
       analytics.addCountdown(time);
       dispatch(addCountdown(time));
     },
@@ -24,9 +24,8 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const AddCountdownContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(AddCountdown);
+const AddCountdownContainer = connect(mapStateToProps, mapDispatchToProps)(
+  AddCountdown
+);
 
 export default AddCountdownContainer;
