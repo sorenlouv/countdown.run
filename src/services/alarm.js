@@ -2,7 +2,7 @@ import once from 'lodash.once';
 
 // Hack: Mobile devices will only allows sounds to be played as part of a user action.
 // This will create a global Audio element, which will be started on the users first interaction with a volume of 0
-const alarmSound = new Audio('/alarm.wav');
+const alarmSound = new Audio('alarm.wav');
 alarmSound.loop = true;
 
 export const startOrStopAlarm = store => {
